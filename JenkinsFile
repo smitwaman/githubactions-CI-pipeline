@@ -11,8 +11,9 @@ pipeline {
         DOCKER_HUB_REGISTRY = 'docker.io' // Docker Hub registry URL
         DOCKER_HUB_USERNAME = 'smitwaman' // Your Docker Hub username
         DOCKER_HUB_REPOSITORY = 'springbootapp' // Your Docker Hub repository name
-        TAG = 'latest' // Tag for the Docker image
-        
+        TAG = '${BUILD_NUMBER}' // Tag for the Docker image
+        GIT_REPO_NAME = "spring-boot-app"
+        GIT_USER_NAME = "smitwaman"
        }
 
     stages {
@@ -57,6 +58,24 @@ pipeline {
                 }
             }
         }   
-        
+      stage('Update Deployment File') {
+        steps {
+            withCredentials([string(credentialsId: 'git', variable: 'GITHUB_TOKEN')]) {
+                sh '''
+                    git config user.email "smitwaman007@gmail.com"
+                    git config user.name "smitwaman"
+                    
+                    sed -i "s/replaceImageTag/${TAG}/g" /deploy/deployment.yml
+                    git add /deploy/deployment.yml
+                    git commit -m "Update deployment image"
+                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                '''
+            }
+        }
+    }
+  
+
+
+
 }
 }
