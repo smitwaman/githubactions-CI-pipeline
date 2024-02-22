@@ -64,9 +64,9 @@ pipeline {
                 sh '''
                     git config user.email "smitwaman007@gmail.com"
                     git config user.name "smitwaman"
-                    
-                    sed -i "s/replaceImageTag/${TAG}/g" /deploy/deployment.yml
-                    git add /deploy/deployment.yml
+                    chmod +x ./deploy/*.yml
+                    sed -i "s/replaceImageTag/${TAG}/g" ./deploy/deployment.yml
+                    git add ./deploy/deployment.yml
                     git commit -m "Update deployment image"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
                 '''
