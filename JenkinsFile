@@ -11,7 +11,7 @@ pipeline {
         DOCKER_HUB_REGISTRY = 'docker.io' // Docker Hub registry URL
         DOCKER_HUB_USERNAME = 'smitwaman' // Your Docker Hub username
         DOCKER_HUB_REPOSITORY = 'springbootapp' // Your Docker Hub repository name
-        TAG = '${BUILD_NUMBER}' // Tag for the Docker image
+        TAG = 'latest' // Tag for the Docker image
         GIT_REPO_NAME = "spring-boot-app"
         GIT_USER_NAME = "smitwaman"
        }
