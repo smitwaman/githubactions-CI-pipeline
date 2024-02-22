@@ -16,9 +16,14 @@ pipeline {
        }
 
     stages {
+     stage('Clean Workspace') {
+            steps {
+                cleanWs()
+            }
+        }
         stage('Checkout') {
             steps {
-                checkout scm
+                git branch: 'main', url: 'https://github.com/smitwaman/spring-boot-app.git'
             }
         }
 
