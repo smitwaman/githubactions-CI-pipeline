@@ -17,14 +17,15 @@
         <plugins>
             <!-- Maven War Plugin -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.1</version>
-                <configuration>
-                    <warName>helloworld</warName>
-                </configuration>
-            </plugin>
-        </plugins>
+                <plugin>            
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-war-plugin</artifactId>
+                    <configuration>
+                       <webXml>/app/WEB-INF/web.xml</webXml>        
+                   </configuration>
+          
+                </plugin>
+            </plugins>            
     </build>
 
 </project>
