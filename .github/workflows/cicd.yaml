@@ -1,13 +1,12 @@
-
 name: CI/CD Pipeline
 
 on:
   push:
     branches:
-      - main 
+      - main  # Adjust branch as needed
   pull_request:
     branches:
-      - main 
+      - main  # Adjust branch as needed
 
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
@@ -36,11 +35,17 @@ jobs:
           ${{ runner.os }}-maven-
 
     - name: Build with Maven
-      run: mvn clean package -X
+      run: mvn clean package
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+      with:
+        distribution: 'default'  # Add the distribution input
 
     - name: Run Selenium tests
       run: |
-           mvn test
+        # Add commands to run Selenium tests
+         mvn test
 
   build-and-publish-docker:
     runs-on: ubuntu-latest
@@ -52,6 +57,8 @@ jobs:
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
+      with:
+        distribution: 'default'  # Add the distribution input
 
     - name: Login to Docker Registry
       run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
@@ -63,4 +70,3 @@ jobs:
       run: |
         docker tag ${{ env.IMAGE_NAME }} ${{ env.IMAGE_NAME }}:latest
         docker push ${{ env.IMAGE_NAME }}:latest
-
