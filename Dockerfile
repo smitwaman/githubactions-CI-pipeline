@@ -6,11 +6,7 @@ FROM maven:3.8.1-jdk-11-slim AS build
 WORKDIR /app
 
 # Copy the Maven configuration file and download dependencies
-COPY pom.xml .
 RUN mvn dependency:go-offline
-
-# Copy the source code
-COPY src ./src
 
 # Package the application
 RUN mvn package -DskipTests
