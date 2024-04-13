@@ -3,10 +3,10 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Adjust branch as needed
+      - main 
   pull_request:
     branches:
-      - main  # Adjust branch as needed
+      - main 
 
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
