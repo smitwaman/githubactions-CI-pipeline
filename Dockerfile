@@ -9,7 +9,7 @@ WORKDIR /app
 RUN mvn dependency:go-offline
 
 # Package the application
-RUN mvn package -DskipTests
+RUN mvn package
 
 # Use an official Tomcat runtime as a parent image
 FROM tomcat:9.0-jdk11-openjdk-slim
