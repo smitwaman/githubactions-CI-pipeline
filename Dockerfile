@@ -5,11 +5,10 @@ FROM maven:3.8.1-jdk-11-slim AS build
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the Maven configuration file and download dependencies
-RUN mvn dependency:go-offline
-
+COPY * /app
 # Package the application
-RUN mvn package
+RUN jar -cvf helloworld.war *.jsp WEB-INF
+
 
 # Use an official Tomcat runtime as a parent image
 FROM tomcat:9.0-jdk11-openjdk-slim
