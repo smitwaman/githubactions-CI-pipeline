@@ -36,43 +36,15 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
             
-            <!-- depgraph-maven-plugin -->
-            <plugin>
-                <groupId>com.github.fracpete</groupId>
-                <artifactId>depgraph-maven-plugin</artifactId>
-                <version>${depgraph-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>graph</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            
         </plugins>
     </build>
     
-    <profiles>
-        <profile>
-            <id>github-actions</id>
-            <properties>
-                <depgraph-maven-plugin.version>0.2.0</depgraph-maven-plugin.version>
-            </properties>
-        </profile>
-    </profiles>
-
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/smitwaman/hello-world</url>
-        </repository>
-    </distributionManagement>
+    
 
 </project>
