@@ -21,5 +21,5 @@ Steps-
    ```
 6. go to browser and paste
 
-   ```
-    http://localhost:8080/helloworld
+   ```http://localhost:8080/helloworld```
+   ![]()
