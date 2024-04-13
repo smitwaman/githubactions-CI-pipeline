@@ -17,15 +17,25 @@
         <plugins>
             <!-- Maven War Plugin -->
             <plugin>
-                <plugin>            
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-war-plugin</artifactId>
-                    <configuration>
-                       <webXml>/app/WEB-INF/web.xml</webXml>        
-                   </configuration>
-          
-                </plugin>
-            </plugins>            
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <webXml>/app/webapp/WEB-INF/web.xml</webXml>
+                </configuration>
+            </plugin>
+            
+            <!-- Maven Compiler Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
 </project>
