@@ -7,11 +7,16 @@
     
     <groupId>com.example</groupId>
     <artifactId>helloworld</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1</version>
     <packaging>war</packaging>
     
     <name>helloworld</name>
     <description>Hello World Web Application</description>
+    
+    <properties>
+        <!-- depgraph-maven-plugin version -->
+        <depgraph-maven-plugin.version>0.2.0</depgraph-maven-plugin.version>
+    </properties>
     
     <build>
         <plugins>
@@ -35,7 +40,39 @@
                     <target>11</target>
                 </configuration>
             </plugin>
+            
+            <!-- depgraph-maven-plugin -->
+            <plugin>
+                <groupId>com.github.fracpete</groupId>
+                <artifactId>depgraph-maven-plugin</artifactId>
+                <version>${depgraph-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>graph</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+    
+    <profiles>
+        <profile>
+            <id>github-actions</id>
+            <properties>
+                <depgraph-maven-plugin.version>0.2.0</depgraph-maven-plugin.version>
+            </properties>
+        </profile>
+    </profiles>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/smitwaman/hello-world</url>
+        </repository>
+    </distributionManagement>
 
 </project>
