@@ -22,4 +22,4 @@ Steps-
 6. go to browser and paste
 
    ```http://localhost:8080/helloworld```
-   ![]()
+   ![](https://github.com/smitwaman/hello-world.war/blob/main/image/Screenshot%202024-04-13%20203823.png)
