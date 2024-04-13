@@ -38,7 +38,7 @@ jobs:
           ${{ runner.os }}-maven-
 
     - name: Maven Build WAR
-      run: mvn clean package -DskipTests
+      run: mvn clean package -X
 
     - name: Selenium Test
       run: |
