@@ -1,4 +1,5 @@
-# CI pipeline using maven for"build-test" and docker for "image-build-publish"
+# CI pipeline using maven for"build-test" and docker for "image-build-publish" in GITHUB ACTIONS
+
 
 
 ```
