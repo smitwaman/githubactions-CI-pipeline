@@ -7,6 +7,6 @@ RUN chmod +x /app/target/helloworld-0.1.war
 FROM tomcat:9.0-jdk11-openjdk-slim
 WORKDIR /usr/local/tomcat/webapps
 
-COPY --from=build /app/target/helloworld.war .
+COPY --from=build /app/target/helloworld-0.1.war .
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
