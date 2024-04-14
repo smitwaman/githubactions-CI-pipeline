@@ -20,7 +20,7 @@ env:
   IMAGE_TAG: v1
 
 jobs:
-  build:
+  build-test-publish:
 
     runs-on: ubuntu-latest
     permissions:
@@ -46,7 +46,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  imagebuild:
+  image-build-push:
 
     runs-on: ubuntu-latest
 
