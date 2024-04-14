@@ -1,8 +1,8 @@
 FROM maven:3.8.1-jdk-11-slim AS build
 WORKDIR /app
-COPY WEB-INF /app
-COPY index.jsp /app
-COPY pom.xml /app
+COPY -r ./WEB-INF ./app/
+COPY ,/index.jsp ./app/
+COPY ./pom.xml ./app/
 RUN mvn clean package
 
 FROM tomcat:9.0-jdk11-openjdk-slim
