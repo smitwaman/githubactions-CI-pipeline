@@ -67,8 +67,13 @@ jobs:
 
 ```
 
+![](https://github.com/smitwaman/hello-world.war/blob/main/image/1.jpg)
 
 
+![](https://github.com/smitwaman/hello-world.war/blob/main/image/2.jpg)
+
+
+![](https://github.com/smitwaman/hello-world.war/blob/main/image/3.jpg)
 
 
 
