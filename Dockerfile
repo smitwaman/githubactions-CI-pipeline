@@ -3,7 +3,7 @@ WORKDIR /app
 COPY . /app
 RUN chmod +x /app/*
 RUN mvn clean package
-RUN chmod +x /app/*
+RUN chmod +x /app/target/helloworld-0.1.war
 FROM tomcat:9.0-jdk11-openjdk-slim
 WORKDIR /usr/local/tomcat/webapps
 
