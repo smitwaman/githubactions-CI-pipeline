@@ -6,7 +6,20 @@ name: CI
 on:
   release:
     types: [created]
+    
+ 
+  push:
+    branches: [ "main" ]
+    # Publish semver tags as releases.
+    tags: [ 'v*.*.*' ]
+  pull_request:
+    branches: [ "main" ]
 
+env:
+  # Use docker.io for Docker Hub if empty
+  REGISTRY: docker.io
+  # github.repository as <account>/<repo>
+  
 jobs:
   build:
 
@@ -42,5 +55,5 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag helloworld:$(date +%s)
+      run: docker build . --file Dockerfile --tag helloworld:latest
       
