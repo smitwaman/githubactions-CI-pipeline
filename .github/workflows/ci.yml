@@ -1,25 +1,19 @@
-# This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
-# For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
-
 name: CI
 
 on:
   release:
     types: [created]
-    
- 
   push:
     branches: [ "main" ]
-    # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
     branches: [ "main" ]
 
 env:
-  # Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
-  # github.repository as <account>/<repo>
-  
+  IMAGE_NAME: helloworld
+  IMAGE_TAG: v1
+
 jobs:
   build:
 
@@ -35,8 +29,8 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-        settings-path: ${{ github.workspace }} # location for the settings.xml file
+        server-id: github
+        settings-path: ${{ github.workspace }}
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
@@ -44,16 +38,23 @@ jobs:
       run: mvn clean test
     - name: Publish to GitHub Packages Apache Maven
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
-  
       env:
-        GITHUB_TOKEN: ${{ secrets.git }}
-   
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   imagebuild:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
+    - name: Login to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{secrets.docker_username}}/helloworld:v1
-      
+      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+
+    - name: Push Docker image to Docker Hub
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
