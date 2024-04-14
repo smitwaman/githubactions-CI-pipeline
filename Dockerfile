@@ -3,10 +3,10 @@ WORKDIR /app
 COPY . /app
 RUN chmod +x /app/*
 RUN mvn clean package
-
+RUN chmod +x /app/*
 FROM tomcat:9.0-jdk11-openjdk-slim
 WORKDIR /usr/local/tomcat/webapps
-RUN chmod +x /app/*
+
 COPY --from=build /app/target/helloworld.war .
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
